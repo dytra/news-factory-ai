@@ -61,7 +61,10 @@ export async function generateNews() {
 	const scrapeNewsReady = await Promise.all(scrapeNews);
 	//@ts-ignore
 	const filteredEmptyNews = filterEmptyNews(scrapeNewsReady);
-	publishNews(filteredEmptyNews);
+	if (filterEmptyNews?.length > 0) {
+		publishNews(filteredEmptyNews);
+
+	}
 	return filteredEmptyNews;
 }
 function filterEmptyNews(data?: NewsItem[] | null | undefined) {
