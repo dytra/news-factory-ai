@@ -18,19 +18,45 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get<{}, MessageResponse>('/', (req, res) => {
-  res.json({
+app.get<{}, MessageResponse>('/', async (req, res) => {
+  await res.json({
     message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
   });
 });
 interface News {
   news: object[]
 }
-app.get<{}, News>('/generateNews', async (req, res) => {
-  const news = await generateNews();
-  res.json({
-    news,
-  });
+
+export interface NewsItem {
+  id: number
+  title: string
+  slug: string
+  pub_date: string
+  content: string
+  thumbnail: string
+  original_link: string
+  source: string
+}
+app.get('/generateNews', async (req, res) => {
+  try {
+    const news = await generateNews();
+    //@ts-ignore
+    const totalPublishedNews = news?.length;
+    await res.send({
+      status: true,
+      message: totalPublishedNews > 0 ? "news published ✨" : "there are currenly no news published 🙃",
+      //@ts-ignore
+      totalPublishedNews: news?.length,
+      publishedNews:news,
+    });
+
+  } catch (err) {
+    console.error(err);
+    await res.status(500).send({
+      status: false,
+      message: "failed to publish news"
+    })
+  }
 });
 
 app.use('/api/v1', api);

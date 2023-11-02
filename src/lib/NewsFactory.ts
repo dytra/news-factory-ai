@@ -17,7 +17,7 @@ export default class NewsFactory {
             const response = await this.openai.chat.completions.create({
                 model,
                 messages: [
-                  {role:"system",content:`You are a news writer assistant. Your job is to rewrite a news to a json format. The json format is "title" and "content". the "content" field should be html. Remove the original publisher information like CNBC. Make sure you return a json string that could be easily parsed javascript.Remove all of the script tags. For html attributes, You have to escape the doublequotes using the double backslashes`},
+                  {role:"system",content:`You are a news writer assistant. Your job is to rewrite a news to a json format. The json format is "title","slug" and "content". the "content" field should be html. Remove the original publisher information like CNBC. Remove any external links and notions. Make sure you return a json string that could be easily parsed javascript.Remove all of the script tags. For html attributes, You have to escape the doublequotes using the double backslashes`},
                   {"role": "user", "content": prompt}],
                 n: 1,
                 temperature,
