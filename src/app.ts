@@ -42,7 +42,7 @@ app.get('/generateNews', async (req, res) => {
     const news = await generateNews();
     //@ts-ignore
     const totalPublishedNews = news?.length;
-    await res.send({
+    await res.status(200).json({
       status: true,
       message: totalPublishedNews > 0 ? "news published ✨" : "there are currenly no news published 🙃",
       //@ts-ignore
