@@ -8,6 +8,7 @@ import api from './api';
 import MessageResponse from './interfaces/MessageResponse';
 import { getNews } from './actions/news';
 import { generateNews } from './endpoints/generateNews';
+import db from './db';
 
 require('dotenv').config();
 
@@ -37,13 +38,14 @@ export interface NewsItem {
   original_link: string
   source: string
 }
+
 app.get('/generateNews', async (req, res) => {
   try {
     const news = await generateNews();
     //@ts-ignore
     const totalPublishedNews = news?.length;
     await res.status(200).json({
-      status: true,
+      status: true, //@ts-ignore
       message: totalPublishedNews > 0 ? "news published ✨" : "there are currenly no news published 🙃",
       //@ts-ignore
       totalPublishedNews: news?.length,
@@ -57,6 +59,15 @@ app.get('/generateNews', async (req, res) => {
       message: "failed to publish news"
     })
   }
+});
+
+app.get('/hello', async (req, res) => {
+  const { data, error } = await db
+    .from("news")
+    .select()
+  console.log("data ", data);
+  console.log("error ",error);
+  res.json({test:"hello"});
 });
 
 app.use('/api/v1', api);

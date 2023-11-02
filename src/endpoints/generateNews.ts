@@ -26,12 +26,15 @@ export async function generateNews() {
     const existInFilteredNews2 = filteredNews2.find( //@ts-ignore
       (item2) => item2?.link === item?.link
     );
-    if (!newsItem) return {};
-    if (newsItem?.length === 0) {
+    // console.log("existInFilteredNews2 ",existInFilteredNews2);
+    // if (!newsItem) return {};
+    if (newsItem?.length === 0 && !existInFilteredNews2) {
       //@ts-ignore
       filteredNews2.push(item);
     }
   }
+  // console.log("filteredNews ",filteredNews2);
+  // return filteredNews2;
   const factory = new NewsFactory(process.env.OPENAI_KEY);
   let json: string | null = "";
   const scrapeNews = filteredNews2.map(async (item) => {
