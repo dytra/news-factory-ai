@@ -6,6 +6,8 @@ import cors from 'cors';
 import * as middlewares from './middlewares';
 import api from './api';
 import MessageResponse from './interfaces/MessageResponse';
+import { getNews } from './actions/news';
+import { generateNews } from './endpoints/generateNews';
 
 require('dotenv').config();
 
@@ -21,10 +23,13 @@ app.get<{}, MessageResponse>('/', (req, res) => {
     message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
   });
 });
-
-app.get<{}, MessageResponse>('/generateNews', (req, res) => {
+interface News {
+  news: object[]
+}
+app.get<{}, News>('/generateNews', async (req, res) => {
+  const news = await generateNews();
   res.json({
-    message: 'ayo',
+    news,
   });
 });
 
