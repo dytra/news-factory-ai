@@ -33,7 +33,7 @@ export async function generateNews() {
 			};
 		} catch (err) {
 			console.error("[!] Failed to parse JSON");
-			console.log(`json:\n`);
+			console.log(`json:\n${json}`);
 			return null;
 		}
 	});
