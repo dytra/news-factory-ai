@@ -54,6 +54,9 @@ export async function generateNews() {
 			};
 		} catch (err) {
 			console.error("[!] Failed to parse JSON");
+			console.log({
+				original_link: link,
+			});
 			console.log(`json:\n${json}`);
 			return null;
 		}
