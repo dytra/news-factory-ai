@@ -4,7 +4,7 @@
   "description": " A basic starter for an express.js API with Typescript",
   "main": "src/index.ts",
   "engines": {
-    "node": "16.19.0"
+    "node": "v16.14.2"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
