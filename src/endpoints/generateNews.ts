@@ -33,6 +33,8 @@ export async function generateNews() {
       filteredNews2.push(item);
     }
   }
+  console.log("[+] Filtered News2")
+  console.log(filteredNews2);
   // console.log("filteredNews ",filteredNews2);
   // return filteredNews2;
   const factory = new NewsFactory(process.env.OPENAI_KEY);
