@@ -47,7 +47,7 @@ export async function generateNews() {
     const { content, thumbnail } = newsDetail;
     const prompt = `Mohon tulis ulang konten dibawah ini:\n${content}, it should in HTML format, and use an informative tone. Hilangkan kata "CNBC" atau "CNBC Indonesia". Hilangkan kaliamt persuasif seperti "saksikan"`;
     // return openAI.generateText(prompt, model, 800);
-    const gen = await factory.generateText(prompt, model, 800);
+    const gen = await factory.generateText(prompt, model, 600);
     const x = gen?.content;
     json = x;
     if (!x) return;
