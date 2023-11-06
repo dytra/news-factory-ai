@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/indent */
 import { getNews } from "../actions/news";
 import { NewsItem } from "../app";
+import { NEWS_LIMIT } from "../config";
 import db from "../db";
 import NewsFactory from "../lib/NewsFactory";
 import { scrapeWeb } from "../utils/utils";
 
-const NEWS_LIMIT = 5;
 
 async function getNewsByLink(link: string) {
   const { data, error } = await db
